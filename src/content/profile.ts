@@ -31,7 +31,7 @@ export const profile = {
     {
       label: "YouTube",
       handle: "@izzpaiiizzzz",
-      href: "https://youtube.com/@izzpaiiizzzz",
+      href: "https://youtube.com/@izzpaiiiizzzz",
     },
     {
       label: "Buy me a coffee",
