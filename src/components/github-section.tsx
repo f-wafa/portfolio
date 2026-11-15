@@ -55,8 +55,7 @@ export async function GitHubSection() {
             <div className="lg:col-span-5 lg:pb-2">
               <p className="max-w-[46ch] text-[0.9375rem] leading-relaxed text-muted">
                 Counts, commits, and the contribution graph come from GitHub
-                and refresh hourly. The projects above are part of the same
-                count.
+                and refresh hourly.
               </p>
             </div>
           </div>

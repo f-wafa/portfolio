@@ -25,9 +25,7 @@ export function ProjectsSection() {
 
             <div className="lg:col-span-5 lg:pb-2">
               <p className="max-w-[46ch] text-[0.9375rem] leading-relaxed text-muted">
-                The list comes from the GitHub API and refreshes hourly. Every
-                project here has a real repository. A live link appears only
-                when one exists.
+                Still trying to free up time for new projects, cooked by school. The list comes from the GitHub API and refreshes hourly.
               </p>
             </div>
           </div>
