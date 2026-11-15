@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { CursorTrail } from "@/components/cursor-trail";
 import { ThemeProvider } from "@/components/theme-provider";
 import { profile } from "@/content/profile";
 import { siteUrl } from "@/lib/site";
@@ -61,12 +62,21 @@ export const metadata: Metadata = {
     title: `${profile.name} | Fullstack developer in training`,
     description:
       "Small web tools, real repositories, and a public learning trail from a developer in training in Indonesia.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Faiz Syaiful Wafa, fullstack developer in training. I build web things by feel.",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: `${profile.name} | Fullstack developer in training`,
     description:
       "Small web tools, real repositories, and a public learning trail from a developer in training in Indonesia.",
+    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -97,6 +107,7 @@ export default function RootLayout({
     >
       <body className="min-h-dvh bg-paper text-ink antialiased">
         <ThemeProvider>
+          <CursorTrail />
           <div id="top" />
           <a href="#main" className="skip-link">
             Skip to content

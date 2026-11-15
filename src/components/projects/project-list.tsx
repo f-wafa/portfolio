@@ -1,4 +1,5 @@
 import { ArrowUpRightIcon } from "@/components/icons";
+import { SnapshotNote } from "@/components/snapshot-note";
 import { profile } from "@/content/profile";
 import { formatFullDate } from "@/lib/format";
 import { getProjects } from "@/lib/github";
@@ -32,12 +33,11 @@ export async function ProjectList() {
   return (
     <div className="mt-12">
       {stale ? (
-        <div className="mb-8 border border-line bg-surface px-4 py-3">
-          <p className="text-sm leading-relaxed text-muted">
-            <span className="font-medium text-ink">Snapshot.</span> GitHub did
-            not answer, so this list is from {formatFullDate(fetchedAt)}. The
-            repository links still work.
-          </p>
+        <div className="mb-8">
+          <SnapshotNote>
+            GitHub did not answer, so this list is from{" "}
+            {formatFullDate(fetchedAt)}. The repository links still work.
+          </SnapshotNote>
         </div>
       ) : null}
 

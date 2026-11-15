@@ -1,8 +1,11 @@
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
+import { GitHubSection } from "@/components/github-section";
 import { Hero } from "@/components/hero/hero";
 import { ProjectsSection } from "@/components/projects/projects-section";
+import { ToolsSection } from "@/components/tools-section";
 import { profile } from "@/content/profile";
+import { siteUrl } from "@/lib/site";
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -11,7 +14,8 @@ const personJsonLd = {
   alternateName: profile.handle,
   jobTitle: profile.role,
   email: `mailto:${profile.email}`,
-  url: profile.github,
+  url: siteUrl,
+  image: `${siteUrl}/og.png`,
   sameAs: profile.socials.map((social) => social.href),
   address: {
     "@type": "PostalAddress",
@@ -30,8 +34,10 @@ export default function Home() {
 
       <main id="main" tabIndex={-1}>
         <Hero />
-        <ProjectsSection />
         <AboutSection />
+        <ProjectsSection />
+        <ToolsSection />
+        <GitHubSection />
         <ContactSection />
       </main>
     </>

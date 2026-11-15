@@ -32,7 +32,7 @@ export function CopyEmailButton({ email }: { email: string }) {
   }
 
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-3">
+    <div className="flex flex-col items-start gap-2">
       <button
         type="button"
         onClick={copyAddress}
@@ -49,7 +49,7 @@ export function CopyEmailButton({ email }: { email: string }) {
       <span
         role="status"
         aria-live="polite"
-        className="text-sm text-muted"
+        className="min-h-5 max-w-[36ch] text-xs leading-relaxed text-muted"
       >
         {status === "copied"
           ? "Email address copied to the clipboard."

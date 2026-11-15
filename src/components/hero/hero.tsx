@@ -8,22 +8,20 @@ export function Hero() {
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-16">
         <div>
           <p className="font-mono text-[11px] leading-relaxed text-muted">
-            {profile.name} <span aria-hidden="true">/</span> fullstack developer
-            in training
+            {profile.name} <span aria-hidden="true">/</span> Indonesia
           </p>
 
-          <h1 className="mt-5 max-w-[760px] text-balance text-[clamp(2.75rem,7.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em]">
+          <h1 className="mt-5 max-w-[720px] text-balance text-[clamp(2.75rem,7.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em]">
             {"I build web things by "}
             <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
               feel
             </em>
-            , then learn why they work.
+            .
           </h1>
 
-          <p className="mt-7 max-w-[54ch] text-pretty text-[1.0625rem] leading-[1.7] text-muted sm:text-lg">
-            I&apos;m Faiz, a 15-year-old developer in training in Indonesia. I
-            start from instinct, read the error, and rebuild until the thing
-            holds. This site keeps the work that held.
+          <p className="mt-7 max-w-[48ch] text-pretty text-[1.0625rem] leading-[1.7] text-muted sm:text-lg">
+            A 15-year-old fullstack developer in training. Instinct starts the
+            draft; the error message finishes it.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -41,18 +39,9 @@ export function Hero() {
               Email me
             </a>
           </div>
-
-          <p className="mt-8 font-mono text-[11px] leading-relaxed text-muted">
-            Based in Indonesia. Open to internships. Learning in public.
-          </p>
         </div>
 
-        <div>
-          <HeroVisual />
-          <p className="mt-2 text-center font-mono text-[11px] text-muted">
-            Low-poly study, drawn in the browser.
-          </p>
-        </div>
+        <HeroVisual />
       </div>
     </section>
   );

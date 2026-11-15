@@ -1,5 +1,6 @@
 import { ArrowUpIcon } from "@/components/icons";
 import { profile } from "@/content/profile";
+import { sections } from "@/content/sections";
 
 const year = new Date().getFullYear();
 
@@ -26,7 +27,7 @@ function FooterLink({
       {...(external
         ? { target: "_blank", rel: "noopener noreferrer" }
         : {})}
-      className="inline-flex min-h-11 items-center text-sm text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="-mx-2 inline-flex min-h-11 items-center px-2 text-sm text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {children}
     </a>
@@ -42,7 +43,7 @@ export function SiteFooter() {
             <a
               href="#top"
               aria-label="Faiz Syaiful Wafa, back to top"
-              className="inline-flex min-h-11 items-center text-xl font-semibold tracking-[-0.04em]"
+              className="-mx-2 inline-flex min-h-11 items-center px-2 text-xl font-semibold tracking-[-0.04em]"
             >
               faiz<span className="text-accent">.</span>
             </a>
@@ -56,15 +57,13 @@ export function SiteFooter() {
             <div>
               <h3 className="font-mono text-[11px] text-muted">Sections</h3>
               <ul className="mt-2">
-                <li>
-                  <FooterLink href="#work">Work</FooterLink>
-                </li>
-                <li>
-                  <FooterLink href="#about">About</FooterLink>
-                </li>
-                <li>
-                  <FooterLink href="#contact">Contact</FooterLink>
-                </li>
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <FooterLink href={`#${section.id}`}>
+                      {section.label}
+                    </FooterLink>
+                  </li>
+                ))}
               </ul>
             </div>
 

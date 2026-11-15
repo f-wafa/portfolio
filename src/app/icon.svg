@@ -1,14 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0b0b0a"/>
-  <text
-    x="15"
-    y="17"
-    text-anchor="middle"
-    dominant-baseline="central"
-    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-    font-size="19"
-    font-weight="700"
-    fill="#f7f5f0"
-  >f</text>
-  <circle cx="24.5" cy="21.5" r="2" fill="#ff7a52"/>
+  <rect width="32" height="32" rx="7" fill="#171512"/>
+  <path d="M16 7.2 23.6 11.6v8.8L16 24.8 8.4 20.4v-8.8Z" fill="#f7f5f0"/>
+  <path d="M16 7.2 23.6 11.6 16 16Z" fill="#ff7a52"/>
+  <path d="M16 16 23.6 20.4 16 24.8Z" fill="#f7f5f0" opacity=".72"/>
+  <path
+    d="M16 7.2v17.6M8.4 11.6 16 16l7.6-4.4M8.4 20.4 16 16l7.6 4.4"
+    fill="none"
+    stroke="#171512"
+    stroke-width=".7"
+    opacity=".28"
+  />
 </svg>

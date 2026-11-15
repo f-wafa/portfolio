@@ -3,14 +3,20 @@ import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { contactSocials, profile } from "@/content/profile";
 
+const [localPart, domain] = profile.email.split("@");
+
 export function ContactSection() {
   return (
-    <section id="contact" className="scroll-mt-20 border-t border-line">
+    <section
+      id="contact"
+      tabIndex={-1}
+      className="scroll-mt-20 border-t border-line focus:outline-none"
+    >
       <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-6">
             <Reveal>
-              <SectionLabel index="03">Contact</SectionLabel>
+              <SectionLabel index="05">Contact</SectionLabel>
               <h2 className="mt-5 max-w-[15ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
                 {"Have something worth "}
                 <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
@@ -57,13 +63,23 @@ export function ContactSection() {
         <Reveal delay={0.1}>
           <div className="mt-14 border-t border-line pt-8">
             <p className="font-mono text-[11px] text-muted">Write to me</p>
-            <a
-              href={`mailto:${profile.email}`}
-              className="mt-3 inline-block max-w-full py-3 text-[clamp(1.3rem,5.2vw,3.4rem)] sm:py-1 font-medium leading-[1.1] tracking-[-0.04em] [overflow-wrap:anywhere] underline decoration-line decoration-2 underline-offset-[0.18em] transition-colors hover:text-accent hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-            >
-              {profile.email}
-            </a>
-            <CopyEmailButton email={profile.email} />
+
+            <div className="mt-2 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <a
+                href={`mailto:${profile.email}`}
+                className="group/email inline-block max-w-full py-3 text-[clamp(1.2rem,6vw,3.4rem)] font-medium leading-[1.12] tracking-[-0.04em] [overflow-wrap:anywhere] underline decoration-line decoration-2 underline-offset-[0.18em] transition-colors hover:text-accent hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:py-1"
+              >
+                <span>{localPart}</span>
+                <span className="text-accent">@</span>
+                <span className="text-muted transition-colors group-hover/email:text-accent">
+                  {domain}
+                </span>
+              </a>
+
+              <div className="shrink-0 sm:pb-1">
+                <CopyEmailButton email={profile.email} />
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>
