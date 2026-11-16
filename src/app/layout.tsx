@@ -4,9 +4,6 @@ import {
   JetBrains_Mono,
   Plus_Jakarta_Sans,
 } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { CursorTrail } from "@/components/cursor-trail";
 import { ThemeProvider } from "@/components/theme-provider";
 import { profile } from "@/content/profile";
 import { siteUrl } from "@/lib/site";
@@ -106,16 +103,7 @@ export default function RootLayout({
       className={`${jakarta.variable} ${mono.variable} ${instrument.variable}`}
     >
       <body className="min-h-dvh bg-paper text-ink antialiased">
-        <ThemeProvider>
-          <CursorTrail />
-          <div id="top" />
-          <a href="#main" className="skip-link">
-            Skip to content
-          </a>
-          <SiteHeader />
-          {children}
-          <SiteFooter />
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

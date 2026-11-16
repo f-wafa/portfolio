@@ -68,7 +68,7 @@ const REPO_COPY: Record<string, string> = {
   "code-to-snippet":
     "A browser tool that turns plain code into ready-to-use VS Code snippets. It keeps placeholders intact, copies, and downloads the file without sending code anywhere.",
   portfolio:
-    "A personal portfolio, built in the open and published as a public repository.",
+    "The site you are reading: design, content, and the WebGL hero all live in one repository.",
 };
 
 const FALLBACK_PROJECTS: Project[] = [
@@ -86,7 +86,7 @@ const FALLBACK_PROJECTS: Project[] = [
     name: "portfolio",
     description: REPO_COPY.portfolio,
     url: "https://github.com/f-wafa/portfolio",
-    liveUrl: "https://f-wafa-portfolio.vercel.app",
+    liveUrl: null,
     language: "TypeScript",
     topics: [],
     updatedAt: "2026-11-14T23:33:50Z",
@@ -117,9 +117,13 @@ function normalizeUrl(value: string | null | undefined) {
 }
 
 function toProject(repo: GitHubRepo): Project {
+  // The portfolio entry is this site: a "Live" link would reload the page the
+  // visitor is already on.
   const liveUrl =
-    normalizeUrl(repo.homepage) ??
-    (repo.has_pages ? pagesUrl(repo.name) : null);
+    repo.name === "portfolio"
+      ? null
+      : (normalizeUrl(repo.homepage) ??
+        (repo.has_pages ? pagesUrl(repo.name) : null));
 
   return {
     name: repo.name,
@@ -287,6 +291,10 @@ type GitHubCommit = {
 const BROWSER_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
+// A commit called "1.3" says nothing to a visitor. Drop pure version bumps so
+// the feed only shows commits that describe a change.
+const VERSION_BUMP = /^v?\d+(\.\d+)*$/i;
+
 const RECENT_WEEKS = 14;
 
 function utcDay(date: Date) {
@@ -396,7 +404,7 @@ async function fetchActivity(): Promise<GitHubActivity> {
     projects.slice(0, 3).map(async (project) => {
       try {
         const response = await fetch(
-          `https://api.github.com/repos/${USERNAME}/${project.name}/commits?per_page=5`,
+          `https://api.github.com/repos/${USERNAME}/${project.name}/commits?per_page=10`,
           { headers },
         );
 
@@ -411,11 +419,13 @@ async function fetchActivity(): Promise<GitHubActivity> {
           .map((commit) => ({
             sha: commit.sha,
             shortSha: commit.sha.slice(0, 7),
-            message: commit.commit.message.split("\n")[0] || "No message",
+            message:
+              commit.commit.message.split("\n")[0]?.trim() || "No message",
             repo: project.name,
             date: commit.commit.author?.date ?? "",
             url: commit.html_url,
-          }));
+          }))
+          .filter((commit) => !VERSION_BUMP.test(commit.message));
       } catch {
         return [];
       }

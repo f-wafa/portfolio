@@ -32,15 +32,15 @@ export function AboutSection() {
                   I&apos;m Faiz Syaiful Wafa, a first-year SMK student in
                   Computer Network Engineering (TKJ) in Indonesia. School covers
                   networking, so web development happens after class: docs,
-                  small builds, and breaks I have to understand before moving
-                  on.
+                  small builds, and bugs I have to understand before moving on.
                 </p>
 
                 <p className="text-[1.0625rem] leading-[1.75] text-muted">
-                  Most of what I know came from reps. code-to-snippet started as
-                  a chore I kept repeating by hand. This portfolio started
-                  because the tool needed somewhere to live. Neither one arrived
-                  in a single draft.
+                  Most of what I know came from repetition: build, break, fix,
+                  understand. code-to-snippet started as a chore I kept
+                  repeating by hand. This portfolio started because the tool
+                  needed somewhere to live. Neither one arrived in a single
+                  draft.
                 </p>
 
                 <p className="text-[1.0625rem] leading-[1.75] text-muted">

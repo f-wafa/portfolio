@@ -50,6 +50,16 @@ export function ContactSection() {
                     </a>
                   </li>
                 ))}
+                <li className="border-b border-line">
+                  <a
+                    href="/cv/faiz-syaiful-wafa-cv.pdf"
+                    download
+                    className="flex min-h-11 items-center justify-between gap-4 py-2.5 text-sm transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                    <span>One-page CV</span>
+                    <span className="font-mono text-[11px] text-muted">PDF</span>
+                  </a>
+                </li>
               </ul>
 
               <p className="mt-6 text-sm leading-relaxed text-muted">

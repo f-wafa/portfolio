@@ -184,3 +184,41 @@
     transform: translateY(0);
   }
 }
+
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  :root,
+  .dark {
+    color-scheme: light;
+    --paper: #ffffff;
+    --surface: #ffffff;
+    --ink: #171512;
+    --muted: #57534b;
+    --line: #cfcabd;
+    --accent: #a83413;
+    --accent-hover: #a83413;
+    --accent-contrast: #ffffff;
+    --selection: #efd4c7;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  header,
+  footer,
+  .skip-link,
+  [data-print-hide] {
+    display: none !important;
+  }
+}

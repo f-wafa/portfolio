@@ -26,10 +26,19 @@ export async function GitHubSection() {
 
   const streak = activity.streak;
   const items = [
-    { label: "Public repositories", value: stats.repositories },
-    { label: "Project languages", value: stats.languageCount },
-    { label: "Followers", value: stats.followers },
-    { label: "Days on GitHub", value: stats.daysOnGitHub },
+    { label: "Projects shipped", value: String(stats.projectRepositories) },
+    {
+      label: "Contributions, last year",
+      value: streak?.total != null ? String(streak.total) : "—",
+    },
+    {
+      label: "Active days, last year",
+      value: streak ? String(streak.activeDays) : "—",
+    },
+    {
+      label: "Longest streak (days)",
+      value: streak ? String(streak.longest) : "—",
+    },
   ];
 
   return (
@@ -80,7 +89,7 @@ export async function GitHubSection() {
                   {item.label}
                 </dt>
                 <dd className="mt-6 text-[clamp(2.5rem,5vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] tabular-nums">
-                  {String(item.value).padStart(2, "0")}
+                  {item.value}
                 </dd>
               </div>
             ))}
@@ -94,7 +103,7 @@ export async function GitHubSection() {
                 <h3 className="font-mono text-[11px] text-muted">
                   Recent commits
                 </h3>
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-[11px] text-muted">
                   {activity.commits.length > 0
                     ? `${activity.commits.length} shown`
                     : ""}
@@ -115,11 +124,11 @@ export async function GitHubSection() {
                         <span className="line-clamp-2 min-w-0 text-[0.9375rem] leading-[1.5] transition-colors group-hover/commit:text-accent">
                           {commit.message}
                         </span>
-                        <span className="shrink-0 font-mono text-[10px] text-muted">
+                        <span className="shrink-0 font-mono text-[11px] text-muted">
                           {formatFullDate(commit.date)}
                         </span>
                       </span>
-                      <span className="mt-1.5 flex flex-wrap items-center gap-x-2 font-mono text-[10px] text-muted">
+                      <span className="mt-1.5 flex flex-wrap items-center gap-x-2 font-mono text-[11px] text-muted">
                         <span>{commit.repo}</span>
                         <span aria-hidden="true">/</span>
                         <span>{commit.shortSha}</span>
@@ -129,8 +138,8 @@ export async function GitHubSection() {
                 </div>
               ) : (
                 <p className="mt-4 max-w-[42ch] text-sm leading-relaxed text-muted">
-                  Commit history is not available right now. The repositories
-                  on GitHub are still the source of truth.
+                  No commits to show right now. The repositories on GitHub are
+                  still the source of truth.
                 </p>
               )}
             </div>
@@ -167,38 +176,10 @@ export async function GitHubSection() {
                     ))}
                   </div>
 
-                  <p className="mt-3 max-w-[34ch] font-mono text-[10px] leading-relaxed text-muted">
+                  <p className="mt-3 max-w-[34ch] font-mono text-[11px] leading-relaxed text-muted">
                     Last 14 weeks. Each square is a day, darker means more
                     contributions.
                   </p>
-
-                  <dl className="mt-7 border-t border-line">
-                    <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
-                      <dt className="text-sm text-muted">Longest streak</dt>
-                      <dd className="font-mono text-xs tabular-nums">
-                        {streak.longest}{" "}
-                        {streak.longest === 1 ? "day" : "days"}
-                      </dd>
-                    </div>
-
-                    {streak.total !== null ? (
-                      <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
-                        <dt className="text-sm text-muted">
-                          Contributions, last year
-                        </dt>
-                        <dd className="font-mono text-xs tabular-nums">
-                          {streak.total}
-                        </dd>
-                      </div>
-                    ) : null}
-
-                    <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
-                      <dt className="text-sm text-muted">Active days</dt>
-                      <dd className="font-mono text-xs tabular-nums">
-                        {streak.activeDays}
-                      </dd>
-                    </div>
-                  </dl>
                 </>
               ) : (
                 <>
@@ -214,8 +195,8 @@ export async function GitHubSection() {
 
           <div className="mt-10 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-[58ch] text-sm leading-relaxed text-muted">
-              {stats.projectRepositories} project repositories in this count,
-              plus the profile repository. Last push{" "}
+              {stats.projectRepositories} projects plus the profile repository.
+              Last push{" "}
               {stats.lastPush
                 ? `${formatFullDate(stats.lastPush)}.`
                 : "not recorded."}

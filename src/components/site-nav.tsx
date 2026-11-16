@@ -10,7 +10,6 @@ function twoDigits(index: number) {
 
 export function SiteNav() {
   const [active, setActive] = useState("");
-  const [progress, setProgress] = useState(0);
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const arrivalTimeout = useRef<number | null>(null);
@@ -32,14 +31,6 @@ export function SiteNav() {
       }
 
       setActive((previous) => (previous === current ? previous : current));
-
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const next =
-        max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
-
-      setProgress((previous) =>
-        Math.abs(previous - next) < 0.001 ? previous : next,
-      );
     };
 
     const onScroll = () => {
@@ -197,54 +188,6 @@ export function SiteNav() {
           </nav>
         </div>
       </details>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px overflow-hidden"
-      >
-        <div
-          className="h-full origin-left bg-accent"
-          style={{ transform: `scaleX(${progress})` }}
-        />
-      </div>
-
-      <nav
-        aria-label="Section index"
-        className="fixed right-2 top-1/2 hidden -translate-y-1/2 flex-col xl:flex"
-      >
-        {sections.map((section, index) => {
-          const current = active === section.id;
-
-          return (
-            <a
-              key={section.id}
-              href={`#${section.id}`}
-              onClick={() => handleNavigate(section.id)}
-              aria-label={`Go to ${section.label}`}
-              aria-current={current ? "location" : undefined}
-              className="group/item flex h-11 items-center justify-end gap-1.5"
-            >
-              <span
-                aria-hidden="true"
-                className={`h-px transition-all duration-300 ${
-                  current
-                    ? "w-4 bg-accent"
-                    : "w-2 bg-line group-hover/item:w-3 group-hover/item:bg-muted"
-                }`}
-              />
-              <span
-                className={`font-mono text-[10px] tabular-nums transition-colors ${
-                  current
-                    ? "text-accent"
-                    : "text-muted group-hover/item:text-ink"
-                }`}
-              >
-                {twoDigits(index)}
-              </span>
-            </a>
-          );
-        })}
-      </nav>
     </>
   );
 }

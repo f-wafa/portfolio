@@ -91,6 +91,11 @@ export function SiteFooter() {
                   </li>
                 ))}
                 <li>
+                  <FooterLink href="/cv/faiz-syaiful-wafa-cv.pdf">
+                    CV (PDF)
+                  </FooterLink>
+                </li>
+                <li>
                   <FooterLink href={profile.source} external>
                     Site source
                   </FooterLink>
