@@ -66,7 +66,7 @@ const cvProjects = [
 
 const education = [
   {
-    title: "SMK — Computer Network Engineering (TKJ)",
+    title: "SMK, Computer Network Engineering (TKJ)",
     meta: "Indonesia · First year",
     detail:
       "Networking coursework at school; web development through documentation, small builds, and public repositories.",

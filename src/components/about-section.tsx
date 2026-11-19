@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
+import { profile } from "@/content/profile";
 
 export function AboutSection() {
   return (
@@ -20,6 +21,23 @@ export function AboutSection() {
                 </em>
                 .
               </h2>
+
+              <dl className="mt-12 hidden border-t border-line lg:block">
+                <div className="flex items-baseline justify-between gap-4 border-b border-line py-3">
+                  <dt className="font-mono text-[11px] text-muted">Based in</dt>
+                  <dd className="text-sm">{profile.location}</dd>
+                </div>
+                <div className="flex items-baseline justify-between gap-4 border-b border-line py-3">
+                  <dt className="font-mono text-[11px] text-muted">
+                    Currently
+                  </dt>
+                  <dd className="text-sm">First-year SMK</dd>
+                </div>
+                <div className="flex items-baseline justify-between gap-4 border-b border-line py-3">
+                  <dt className="font-mono text-[11px] text-muted">Focus</dt>
+                  <dd className="text-sm">Next.js, TypeScript</dd>
+                </div>
+              </dl>
             </Reveal>
           </div>
 

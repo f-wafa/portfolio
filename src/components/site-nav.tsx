@@ -97,9 +97,13 @@ export function SiteNav() {
     const target = document.getElementById(id);
     if (!target) return;
 
-    target.classList.remove("section-arrive");
-    void target.offsetWidth;
-    target.classList.add("section-arrive");
+    const header = document.querySelector("header");
+
+    header?.classList.remove("nav-arrive");
+    if (header) {
+      void header.offsetWidth;
+      header.classList.add("nav-arrive");
+    }
 
     // Move the reading position, not just the scroll offset, so the next Tab
     // continues from the section the visitor asked for.
@@ -110,7 +114,7 @@ export function SiteNav() {
     }
 
     arrivalTimeout.current = window.setTimeout(() => {
-      target.classList.remove("section-arrive");
+      header?.classList.remove("nav-arrive");
     }, 1000);
   }
 
@@ -129,9 +133,9 @@ export function SiteNav() {
               href={`#${section.id}`}
               onClick={() => handleNavigate(section.id)}
               aria-current={current ? "location" : undefined}
-              className={`inline-flex min-h-11 items-center rounded-sm px-2 text-[0.8125rem] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3 sm:text-sm ${
+              className={`inline-flex min-h-11 items-center rounded-sm px-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3 sm:text-[0.9375rem] ${
                 current
-                  ? "text-ink underline decoration-accent decoration-2 underline-offset-[6px]"
+                  ? "text-ink underline decoration-accent decoration-2 underline-offset-8"
                   : "text-muted hover:text-ink"
               }`}
             >
@@ -160,7 +164,15 @@ export function SiteNav() {
           </span>
         </summary>
 
-        <div className="hidden fixed inset-x-0 top-16 border-b border-line bg-paper px-5 pb-5 group-open:block">
+        <button
+          type="button"
+          aria-label="Close menu"
+          tabIndex={-1}
+          onClick={() => detailsRef.current?.removeAttribute("open")}
+          className="fixed inset-0 top-16 hidden cursor-default bg-ink/20 group-open:block dark:bg-black/60"
+        />
+
+        <div className="fixed inset-x-0 top-16 hidden max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-line bg-paper px-5 pb-5 group-open:block">
           <nav aria-label="Sections" className="flex flex-col">
             {sections.map((section, index) => {
               const current = active === section.id;

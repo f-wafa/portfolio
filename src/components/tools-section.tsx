@@ -9,7 +9,7 @@ export function ToolsSection() {
       tabIndex={-1}
       className="border-t border-line focus:outline-none"
     >
-      <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 sm:py-20">
         <Reveal>
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
@@ -33,22 +33,17 @@ export function ToolsSection() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="mt-14 grid border-t border-line sm:grid-cols-3">
+          <div className="mt-10 grid border-t border-line sm:grid-cols-3">
             {profile.stack.map((group) => (
               <div
                 key={group.label}
-                className="border-b border-line py-7 sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
+                className="border-b border-line py-6 sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
               >
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-sm font-medium">{group.label}</h3>
-                  <span className="font-mono text-[11px] text-muted">
-                    {String(group.items.length).padStart(2, "0")}
-                  </span>
-                </div>
+                <h3 className="text-sm font-medium">{group.label}</h3>
 
-                <ul className="mt-5 space-y-2">
+                <ul className="mt-4 space-y-1.5">
                   {group.items.map((item) => (
-                    <li key={item} className="text-[1.0625rem] leading-snug">
+                    <li key={item} className="text-base leading-snug">
                       {item}
                     </li>
                   ))}

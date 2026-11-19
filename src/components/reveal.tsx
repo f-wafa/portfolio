@@ -17,12 +17,17 @@ export function Reveal({
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!("IntersectionObserver" in window)) return;
-
-    // Only hide what the visitor cannot see yet. Content above the fold, printed
-    // pages, and no-JS visits keep the plain visible markup.
-    if (element.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+    // Only hide what the visitor cannot see yet. A second effect run can land
+    // after the browser restored a scroll position or jumped to a hash, so any
+    // pending state from the first run is cleared before bailing out.
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window) ||
+      element.getBoundingClientRect().top < window.innerHeight * 0.92
+    ) {
+      element.classList.remove("reveal-pending");
+      return;
+    }
 
     element.classList.add("reveal-pending");
 

@@ -4,13 +4,7 @@ import { sections } from "@/content/sections";
 
 const year = new Date().getFullYear();
 
-const elsewhere = profile.socials.filter((social) =>
-  ["GitHub", "LinkedIn", "Instagram"].includes(social.label),
-);
-
-const more = profile.socials.filter((social) =>
-  ["TikTok", "YouTube", "Buy me a coffee"].includes(social.label),
-);
+const elsewhere = profile.socials;
 
 function FooterLink({
   href,
@@ -42,10 +36,12 @@ export function SiteFooter() {
           <div className="lg:col-span-5">
             <a
               href="#top"
-              aria-label="Faiz Syaiful Wafa, back to top"
               className="-mx-2 inline-flex min-h-11 items-center px-2 text-xl font-semibold tracking-[-0.04em]"
             >
               faiz<span className="text-accent">.</span>
+              <span className="sr-only">
+                , Faiz Syaiful Wafa, back to top
+              </span>
             </a>
             <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-muted">
               Fullstack developer in training. Indonesia. Learning in public,
@@ -53,7 +49,7 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
+          <div className="grid grid-cols-2 gap-8 lg:col-span-5 lg:col-start-8">
             <div>
               <h3 className="font-mono text-[11px] text-muted">Sections</h3>
               <ul className="mt-2">
@@ -79,29 +75,6 @@ export function SiteFooter() {
                 ))}
               </ul>
             </div>
-
-            <div>
-              <h3 className="font-mono text-[11px] text-muted">More</h3>
-              <ul className="mt-2">
-                {more.map((social) => (
-                  <li key={social.label}>
-                    <FooterLink href={social.href} external>
-                      {social.label}
-                    </FooterLink>
-                  </li>
-                ))}
-                <li>
-                  <FooterLink href="/cv/faiz-syaiful-wafa-cv.pdf">
-                    CV (PDF)
-                  </FooterLink>
-                </li>
-                <li>
-                  <FooterLink href={profile.source} external>
-                    Site source
-                  </FooterLink>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
 
@@ -109,16 +82,21 @@ export function SiteFooter() {
           <p className="text-xs text-muted">
             &copy; {year} {profile.name}.
           </p>
-          <p className="text-xs text-muted">
-            Built with Next.js, React Three Fiber, and Tailwind CSS.
-          </p>
-          <a
-            href="#top"
-            className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            Back to top
-            <ArrowUpIcon className="h-3.5 w-3.5" />
-          </a>
+          <div className="flex flex-wrap items-center gap-x-5">
+            <FooterLink href="/cv/faiz-syaiful-wafa-cv.pdf">
+              CV (PDF)
+            </FooterLink>
+            <FooterLink href={profile.source} external>
+              Site source
+            </FooterLink>
+            <a
+              href="#top"
+              className="inline-flex min-h-11 items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Back to top
+              <ArrowUpIcon className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

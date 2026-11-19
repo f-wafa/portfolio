@@ -19,9 +19,9 @@ export const projectStories: Record<string, ProjectStory> = {
   },
   portfolio: {
     title: "This Portfolio",
-    image: "/shots/portfolio.webp",
+    image: "/shots/portfolio-work.webp",
     imageAlt:
-      "The hero of this portfolio beside a low-poly wireframe lattice.",
+      "The Work section of this portfolio, with two project entries and a screenshot beside each one.",
     stack: ["Next.js", "React Three Fiber", "Tailwind CSS", "GitHub API"],
     note: "The hero is decoration, so it loads after the text, pauses off-screen, and falls back to an SVG. GitHub data is cached for an hour so the page never waits on the API.",
   },

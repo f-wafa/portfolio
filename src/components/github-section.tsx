@@ -25,19 +25,20 @@ export async function GitHubSection() {
   ]);
 
   const streak = activity.streak;
+  const commits = activity.commits.slice(0, 3);
   const items = [
     { label: "Projects shipped", value: String(stats.projectRepositories) },
     {
       label: "Contributions, last year",
-      value: streak?.total != null ? String(streak.total) : "—",
+      value: streak?.total != null ? String(streak.total) : "n/a",
     },
     {
       label: "Active days, last year",
-      value: streak ? String(streak.activeDays) : "—",
+      value: streak ? String(streak.activeDays) : "n/a",
     },
     {
       label: "Longest streak (days)",
-      value: streak ? String(streak.longest) : "—",
+      value: streak ? String(streak.longest) : "n/a",
     },
   ];
 
@@ -47,7 +48,7 @@ export async function GitHubSection() {
       tabIndex={-1}
       className="border-t border-line focus:outline-none"
     >
-      <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 sm:py-24">
         <Reveal>
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
@@ -82,13 +83,16 @@ export async function GitHubSection() {
         ) : null}
 
         <Reveal delay={0.05}>
-          <dl className="mt-10 grid grid-cols-2 gap-px border-y border-line bg-line sm:grid-cols-4">
+          <dl className="mt-8 grid grid-cols-2 gap-px border-y border-line bg-line sm:grid-cols-4">
             {items.map((item) => (
-              <div key={item.label} className="bg-paper px-5 py-8 sm:px-7">
+              <div
+                key={item.label}
+                className="flex flex-col bg-paper px-5 py-6 sm:px-6"
+              >
                 <dt className="font-mono text-[11px] leading-relaxed text-muted">
                   {item.label}
                 </dt>
-                <dd className="mt-6 text-[clamp(2.5rem,5vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] tabular-nums">
+                <dd className="mt-auto pt-5 text-[clamp(2rem,4vw,2.5rem)] font-semibold leading-none tracking-[-0.05em] tabular-nums">
                   {item.value}
                 </dd>
               </div>
@@ -97,22 +101,20 @@ export async function GitHubSection() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="mt-12 grid gap-12 border-t border-line pt-10 lg:grid-cols-12 lg:gap-8">
+          <div className="mt-10 grid gap-12 border-t border-line pt-8 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-7">
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="font-mono text-[11px] text-muted">
                   Recent commits
                 </h3>
                 <span className="font-mono text-[11px] text-muted">
-                  {activity.commits.length > 0
-                    ? `${activity.commits.length} shown`
-                    : ""}
+                  {commits.length > 0 ? `${commits.length} shown` : ""}
                 </span>
               </div>
 
-              {activity.commits.length > 0 ? (
+              {commits.length > 0 ? (
                 <div className="mt-4">
-                  {activity.commits.map((commit) => (
+                  {commits.map((commit) => (
                     <a
                       key={commit.sha}
                       href={commit.url}
@@ -148,15 +150,16 @@ export async function GitHubSection() {
               {streak ? (
                 <>
                   <h3 className="font-mono text-[11px] text-muted">
-                    Current streak
+                    Contribution activity
                   </h3>
 
                   <p className="mt-4 flex items-end gap-2">
-                    <span className="text-[clamp(2.5rem,5vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] tabular-nums">
-                      {streak.current}
+                    <span className="text-[clamp(2rem,4vw,2.5rem)] font-semibold leading-none tracking-[-0.05em] tabular-nums">
+                      {streak.recentActiveDays}
                     </span>
-                    <span className="pb-1.5 text-sm text-muted">
-                      {streak.current === 1 ? "day" : "days"} in a row
+                    <span className="pb-1 text-sm text-muted">
+                      active {streak.recentActiveDays === 1 ? "day" : "days"},
+                      last 14 weeks
                     </span>
                   </p>
 
@@ -165,21 +168,28 @@ export async function GitHubSection() {
                     aria-label={`Contribution activity over the last 14 weeks: ${streak.recentActiveDays} active ${
                       streak.recentActiveDays === 1 ? "day" : "days"
                     }.`}
-                    className="mt-6 grid w-max grid-flow-col grid-rows-[repeat(7,9px)] gap-[3px]"
+                    className="mt-5 grid w-max grid-flow-col grid-rows-[repeat(7,11px)] gap-[3px]"
                   >
                     {streak.days.map((day) => (
                       <span
                         key={day.date}
                         aria-hidden="true"
-                        className={`h-[9px] w-[9px] rounded-[1px] ${dayClass(day.level)}`}
+                        className={`h-[11px] w-[11px] rounded-[1px] ${dayClass(day.level)}`}
                       />
                     ))}
                   </div>
 
-                  <p className="mt-3 max-w-[34ch] font-mono text-[11px] leading-relaxed text-muted">
-                    Last 14 weeks. Each square is a day, darker means more
-                    contributions.
-                  </p>
+                  <div className="mt-3 flex items-center gap-1.5 font-mono text-[11px] text-muted">
+                    <span>Less</span>
+                    {LEVEL_CLASS.map((levelClass, index) => (
+                      <span
+                        key={index}
+                        aria-hidden="true"
+                        className={`h-[9px] w-[9px] rounded-[1px] ${levelClass}`}
+                      />
+                    ))}
+                    <span>More</span>
+                  </div>
                 </>
               ) : (
                 <>
@@ -195,11 +205,7 @@ export async function GitHubSection() {
 
           <div className="mt-10 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-[58ch] text-sm leading-relaxed text-muted">
-              {stats.projectRepositories} projects plus the profile repository.
-              Last push{" "}
-              {stats.lastPush
-                ? `${formatFullDate(stats.lastPush)}.`
-                : "not recorded."}
+              {stats.projectRepositories} project repositories.
             </p>
 
             <a

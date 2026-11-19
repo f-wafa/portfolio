@@ -36,7 +36,7 @@ export function CopyEmailButton({ email }: { email: string }) {
       <button
         type="button"
         onClick={copyAddress}
-        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border border-ink px-4 text-sm font-medium transition-colors hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-sm px-3 text-sm font-medium text-muted transition-colors hover:bg-paper hover:text-ink active:bg-line/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         {status === "copied" ? (
           <CheckIcon className="h-4 w-4" />

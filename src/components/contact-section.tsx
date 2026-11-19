@@ -11,7 +11,7 @@ export function ContactSection() {
     <section
       id="contact"
       tabIndex={-1}
-      className="border-t border-line focus:outline-none"
+      className="border-t border-line bg-surface focus:outline-none"
     >
       <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">

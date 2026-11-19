@@ -8,7 +8,7 @@
   --surface: #fdfbf6;
   --ink: #171512;
   --muted: #6b675e;
-  --line: #ddd8cc;
+  --line: #d4cec0;
   --accent: #bc3d18;
   --accent-hover: #9c3112;
   --accent-contrast: #fdfbf6;
@@ -21,7 +21,7 @@
   --surface: #141412;
   --ink: #f2efe8;
   --muted: #a9a49a;
-  --line: #2b2925;
+  --line: #35322c;
   --accent: #ff7a52;
   --accent-hover: #ff9473;
   --accent-contrast: #0b0b0a;
@@ -114,18 +114,18 @@
 @layer components {
   .reveal-pending {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(10px);
   }
 
   .reveal-running {
-    animation: reveal-in 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: reveal-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--reveal-delay, 0s);
   }
 
   @keyframes reveal-in {
     from {
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(10px);
     }
     to {
       opacity: 1;
@@ -153,23 +153,19 @@
     }
   }
 
-  .section-arrive {
-    position: relative;
-  }
-
-  .section-arrive::before {
+  header.nav-arrive::after {
     content: "";
     position: absolute;
     inset-inline: 0;
-    top: 1px;
+    bottom: -1px;
     height: 1px;
     background: var(--accent);
     transform-origin: left;
-    animation: section-arrive 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: nav-arrive 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
     pointer-events: none;
   }
 
-  @keyframes section-arrive {
+  @keyframes nav-arrive {
     0% {
       transform: scaleX(0);
       opacity: 1;
@@ -180,6 +176,13 @@
     }
     100% {
       transform: scaleX(1);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    header.nav-arrive::after {
+      animation: none;
       opacity: 0;
     }
   }

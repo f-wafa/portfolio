@@ -15,13 +15,13 @@ type HeroSceneProps = {
 
 const PALETTES = {
   light: {
-    core: "#b8b0a2",
+    core: "#a89f90",
     wire: "#1b1915",
     accent: "#bc3d18",
     points: "#1b1915",
   },
   dark: {
-    core: "#f2efe8",
+    core: "#e9e4da",
     wire: "#f2efe8",
     accent: "#ff7a52",
     points: "#f2efe8",
@@ -160,7 +160,7 @@ function Lattice({ theme }: { theme: Theme }) {
                 color={palette.wire}
                 wireframe
                 transparent
-                opacity={theme === "dark" ? 0.24 : 0.18}
+                opacity={theme === "dark" ? 0.3 : 0.24}
               />
             </mesh>
           </group>
@@ -174,10 +174,10 @@ function Lattice({ theme }: { theme: Theme }) {
             </bufferGeometry>
             <pointsMaterial
               color={palette.points}
-              size={0.022}
+              size={0.026}
               sizeAttenuation
               transparent
-              opacity={0.38}
+              opacity={0.55}
               depthWrite={false}
             />
           </points>

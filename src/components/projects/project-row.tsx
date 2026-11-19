@@ -24,6 +24,10 @@ export function ProjectRow({
 
   const story = projectStories[project.name];
   const title = story?.title ?? project.name;
+  const destination = project.liveUrl ?? project.url;
+  const destinationLabel = destination
+    .replace(/^https?:\/\//, "")
+    .replace(/\/$/, "");
 
   const seen = new Set<string>();
   const chips = [project.language, ...(story?.stack ?? []), ...project.topics]
@@ -44,7 +48,7 @@ export function ProjectRow({
         </span>
       </div>
 
-      <div className="order-3 lg:order-none lg:col-span-7">
+      <div className="order-2 lg:order-none lg:col-span-7">
         <h3 className="text-[clamp(1.5rem,3.4vw,2.25rem)] font-semibold leading-tight tracking-[-0.03em]">
           {title}
         </h3>
@@ -112,21 +116,27 @@ export function ProjectRow({
       </div>
 
       {story ? (
-        <div className="order-2 lg:order-none lg:col-span-4">
+        <div className="order-3 lg:order-none lg:col-span-4">
           <a
-            href={project.liveUrl ?? project.url}
+            href={destination}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open ${title}`}
+            aria-label={`Open ${title} at ${destinationLabel}`}
             className="group/shot block overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
+            <span className="flex h-8 items-center justify-between gap-3 border-b border-line px-3">
+              <span className="truncate font-mono text-[11px] text-muted">
+                {destinationLabel}
+              </span>
+              <ArrowUpRightIcon className="h-3.5 w-3.5 shrink-0 text-muted transition-colors group-hover/shot:text-accent" />
+            </span>
             <Image
               src={story.image}
               alt={story.imageAlt}
               width={1207}
               height={952}
               sizes="(min-width: 1024px) 33vw, calc(100vw - 2.5rem)"
-              className="aspect-[4/3] w-full object-cover object-top transition-transform duration-500 group-hover/shot:scale-[1.02]"
+              className="aspect-[4/3] w-full object-cover object-top transition-transform duration-500 group-hover/shot:scale-[1.02] dark:brightness-[.94]"
             />
           </a>
         </div>

@@ -18,7 +18,7 @@ export function Hero() {
             </span>
           </p>
 
-          <h1 className="mt-5 max-w-[720px] text-balance text-[clamp(2.75rem,7.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em]">
+          <h1 className="mt-5 max-w-[720px] text-balance text-[clamp(2.5rem,7.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em]">
             {"I build web things by "}
             <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
               feel
@@ -48,14 +48,6 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="mt-4 text-sm text-muted">
-            <a
-              href={`mailto:${profile.email}`}
-              className="inline-flex min-h-11 items-center font-medium underline decoration-line decoration-1 underline-offset-[5px] transition-colors hover:text-ink hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              Or email me
-            </a>
-          </p>
         </div>
 
         <HeroVisual />
