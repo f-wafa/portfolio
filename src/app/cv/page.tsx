@@ -147,7 +147,6 @@ export default function CvPage() {
               Indonesia. I build small web tools that I can finish and keep
               public, and I care about interfaces that stay fast, accessible,
               and usable when JavaScript or a third-party API is unavailable.
-              Open to internships and small collaborations.
             </p>
           </CvSection>
 

@@ -2,6 +2,7 @@ import { CopyEmailButton } from "@/components/copy-email-button";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { contactSocials, profile } from "@/content/profile";
+import { availability } from "@/content/status";
 
 const [localPart, domain] = profile.email.split("@");
 
@@ -10,7 +11,7 @@ export function ContactSection() {
     <section
       id="contact"
       tabIndex={-1}
-      className="scroll-mt-20 border-t border-line focus:outline-none"
+      className="border-t border-line focus:outline-none"
     >
       <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
@@ -25,8 +26,8 @@ export function ContactSection() {
                 ?
               </h2>
               <p className="mt-5 max-w-[44ch] text-[1.0625rem] leading-[1.7] text-muted">
-                Internships, small builds, or a question about a project. Email
-                is the fastest way to reach me.
+                Small builds, fixes, or a question about a project. Email is
+                the fastest way to reach me.
               </p>
             </Reveal>
           </div>
@@ -63,8 +64,9 @@ export function ContactSection() {
               </ul>
 
               <p className="mt-6 text-sm leading-relaxed text-muted">
-                Open to internships and small collaborations. Based in{" "}
-                {profile.location}.
+                {availability.openToInternships
+                  ? `Open to internships and small collaborations. Based in ${profile.location}.`
+                  : `Based in ${profile.location}. Questions and small projects are welcome.`}
               </p>
             </Reveal>
           </div>

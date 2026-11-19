@@ -45,7 +45,7 @@ export async function GitHubSection() {
     <section
       id="github"
       tabIndex={-1}
-      className="scroll-mt-20 border-t border-line focus:outline-none"
+      className="border-t border-line focus:outline-none"
     >
       <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
         <Reveal>

@@ -4,6 +4,7 @@ import {
   JetBrains_Mono,
   Plus_Jakarta_Sans,
 } from "next/font/google";
+import { ConsoleSignature } from "@/components/console-signature";
 import { ThemeProvider } from "@/components/theme-provider";
 import { profile } from "@/content/profile";
 import { siteUrl } from "@/lib/site";
@@ -103,7 +104,10 @@ export default function RootLayout({
       className={`${jakarta.variable} ${mono.variable} ${instrument.variable}`}
     >
       <body className="min-h-dvh bg-paper text-ink antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ConsoleSignature />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

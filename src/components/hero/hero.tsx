@@ -1,16 +1,21 @@
 import { HeroVisual } from "@/components/hero/hero-visual";
 import { ArrowDownIcon } from "@/components/icons";
 import { profile } from "@/content/profile";
+import { availability } from "@/content/status";
 
 export function Hero() {
   return (
-    <section className="mx-auto max-w-[1180px] px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20 lg:pt-24">
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-16">
+    <section className="mx-auto flex w-full max-w-[1180px] flex-1 items-center px-5 py-8 sm:px-8 sm:py-12">
+      <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
         <div>
           <p className="font-mono text-[11px] leading-relaxed text-muted">
             {profile.name} <span aria-hidden="true">/</span> Indonesia{" "}
             <span aria-hidden="true">/</span>{" "}
-            <span className="text-accent">Open to internships</span>
+            <span className="text-accent">
+              {availability.openToInternships
+                ? "Open to internships"
+                : availability.status}
+            </span>
           </p>
 
           <h1 className="mt-5 max-w-[720px] text-balance text-[clamp(2.75rem,7.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em]">

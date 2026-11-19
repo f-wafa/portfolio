@@ -2,6 +2,7 @@ import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { GitHubSection } from "@/components/github-section";
 import { Hero } from "@/components/hero/hero";
+import { NowStrip } from "@/components/now-strip";
 import { ProjectsSection } from "@/components/projects/projects-section";
 import { ToolsSection } from "@/components/tools-section";
 import { profile } from "@/content/profile";
@@ -33,7 +34,10 @@ export default function Home() {
       />
 
       <main id="main" tabIndex={-1}>
-        <Hero />
+        <div className="flex min-h-[calc(100dvh-4rem-1px)] flex-col">
+          <Hero />
+          <NowStrip />
+        </div>
         <AboutSection />
         <ProjectsSection />
         <ToolsSection />

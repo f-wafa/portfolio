@@ -6,23 +6,21 @@ export function AboutSection() {
     <section
       id="about"
       tabIndex={-1}
-      className="scroll-mt-20 border-t border-line focus:outline-none"
+      className="border-t border-line focus:outline-none"
     >
       <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24">
-              <Reveal>
-                <SectionLabel index="01">About</SectionLabel>
-                <h2 className="mt-5 max-w-[13ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-                  {"Learning "}
-                  <em className="ml-[0.1em] font-serif font-normal italic tracking-[-0.02em] text-accent">
-                    out loud
-                  </em>
-                  .
-                </h2>
-              </Reveal>
-            </div>
+            <Reveal>
+              <SectionLabel index="01">About</SectionLabel>
+              <h2 className="mt-5 max-w-[13ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+                {"Learning "}
+                <em className="ml-[0.1em] font-serif font-normal italic tracking-[-0.02em] text-accent">
+                  out loud
+                </em>
+                .
+              </h2>
+            </Reveal>
           </div>
 
           <div className="lg:col-span-7 lg:col-start-6">

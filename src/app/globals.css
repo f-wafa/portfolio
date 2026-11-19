@@ -45,6 +45,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* The header is 4rem tall plus its 1px rule. Anchor jumps stop 1px under
+       that rule so the section's own top border tucks behind it: one clean
+       line instead of two lines with a subpixel seam. */
+    scroll-padding-top: 4rem;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -53,6 +57,19 @@
     color: var(--ink);
     font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
     text-rendering: optimizeLegibility;
+  }
+
+  /* A grain layer above everything keeps the paper palette from reading as a
+     flat fill, including over images and the sticky header. Hidden in print. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
   }
 
   ::selection {
@@ -144,7 +161,7 @@
     content: "";
     position: absolute;
     inset-inline: 0;
-    top: -1px;
+    top: 1px;
     height: 1px;
     background: var(--accent);
     transform-origin: left;
@@ -219,6 +236,10 @@
   footer,
   .skip-link,
   [data-print-hide] {
+    display: none !important;
+  }
+
+  body::after {
     display: none !important;
   }
 }
