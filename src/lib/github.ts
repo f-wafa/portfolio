@@ -143,8 +143,13 @@ function toProject(repo: GitHubRepo): Project {
 
 function sortProjects(projects: Project[]) {
   return projects.sort((a, b) => {
-    if (a.name === "portfolio") return 1;
-    if (b.name === "portfolio") return -1;
+    const aIsPortfolio = a.name === "portfolio";
+    const bIsPortfolio = b.name === "portfolio";
+
+    if (aIsPortfolio !== bIsPortfolio) {
+      return aIsPortfolio ? -1 : 1;
+    }
+
     return b.updatedAt.localeCompare(a.updatedAt);
   });
 }
@@ -202,7 +207,7 @@ async function fetchSnapshot(): Promise<Snapshot> {
     };
   } catch {
     return {
-      projects: FALLBACK_PROJECTS,
+      projects: sortProjects([...FALLBACK_PROJECTS]),
       user: FALLBACK_USER,
       stale: true,
       fetchedAt: FALLBACK_AT,
@@ -291,9 +296,10 @@ type GitHubCommit = {
 const BROWSER_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
-// A commit called "1.3" says nothing to a visitor. Drop pure version bumps so
-// the feed only shows commits that describe a change.
-const VERSION_BUMP = /^v?\d+(\.\d+)*$/i;
+// A commit called "1.3" says nothing to a visitor. Drop pure version
+// messages, including typos with repeated dots, so the feed only shows
+// commits that describe a change.
+const VERSION_BUMP = /^v?\d+(?:\.+\d+)*$/i;
 
 const RECENT_WEEKS = 14;
 

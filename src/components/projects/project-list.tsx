@@ -46,7 +46,9 @@ export async function ProjectList() {
           <ProjectRow
             key={project.name}
             project={project}
-            index={index + 1}
+            // Zero-based on purpose: the portfolio itself is 00 and the
+            // projects it came from follow as 01, 02, and so on.
+            index={index}
           />
         ))}
       </div>
