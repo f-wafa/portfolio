@@ -83,6 +83,7 @@ export function HeroVisual() {
       ref={containerRef}
       role="img"
       aria-label="A low-poly wireframe lattice with a single orbit ring, drawn in the browser."
+      data-hero-visual="true"
       className="relative mx-auto aspect-square w-full max-w-[260px] sm:max-w-[400px] lg:max-w-[560px]"
     >
       <LatticeFallback

@@ -57,17 +57,45 @@ function Lattice({ theme }: { theme: Theme }) {
   const spin = useRef<Group>(null);
   const shell = useRef<Group>(null);
   const orbit = useRef<Group>(null);
-  const pointer = useRef({ x: 0, y: 0 });
+  const pointer = useRef({ x: 0, y: 0, near: 0 });
   const scroll = useRef(0);
   const positions = useParticleField(150);
   const palette = PALETTES[theme];
 
   useEffect(() => {
     const finePointer = window.matchMedia("(pointer: fine)");
+    const visual = document.querySelector<HTMLElement>("[data-hero-visual]");
 
     const onPointerMove = (event: PointerEvent) => {
-      pointer.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.current.y = (event.clientY / window.innerHeight) * 2 - 1;
+      if (!visual) return;
+
+      const rect = visual.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      // Track the pointer inside the visual, not the whole window, so the
+      // lattice answers across its own width instead of a small slice of it.
+      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+      const influence = Math.max(
+        0,
+        1 - Math.max(Math.abs(x), Math.abs(y)) / 1.7,
+      );
+
+      // Ease the lattice back to rest once the pointer leaves the visual, so
+      // it does not sit permanently cocked toward the last known position.
+      pointer.current.x = MathUtils.clamp(x, -1.4, 1.4) * influence;
+      pointer.current.y = MathUtils.clamp(y, -1.4, 1.4) * influence;
+      pointer.current.near = influence;
+    };
+
+    const resetPointer = () => {
+      pointer.current.x = 0;
+      pointer.current.y = 0;
+      pointer.current.near = 0;
+    };
+
+    const onPointerOut = (event: PointerEvent) => {
+      if (!event.relatedTarget) resetPointer();
     };
 
     const onScroll = () => {
@@ -78,37 +106,55 @@ function Lattice({ theme }: { theme: Theme }) {
 
     if (finePointer.matches) {
       window.addEventListener("pointermove", onPointerMove, { passive: true });
+      window.addEventListener("pointerout", onPointerOut, { passive: true });
     }
+    window.addEventListener("blur", resetPointer);
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerout", onPointerOut);
+      window.removeEventListener("blur", resetPointer);
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
   useFrame((state, delta) => {
     const step = Math.min(delta, 0.05);
+    const reach = 0.35 + pointer.current.near * 0.65;
 
     if (tilt.current) {
-      const targetX = pointer.current.y * 0.16 + scroll.current * 0.12;
-      const targetY = pointer.current.x * 0.28;
+      const targetX = pointer.current.y * 0.3 * reach + scroll.current * 0.12;
+      const targetY = pointer.current.x * 0.52 * reach;
+      const targetZ = pointer.current.x * -0.05 * reach;
 
       tilt.current.rotation.x = MathUtils.damp(
         tilt.current.rotation.x,
         targetX,
-        3.5,
+        2.8,
         step,
       );
       tilt.current.rotation.y = MathUtils.damp(
         tilt.current.rotation.y,
         targetY,
-        3.5,
+        2.8,
+        step,
+      );
+      tilt.current.rotation.z = MathUtils.damp(
+        tilt.current.rotation.z,
+        targetZ,
+        2.8,
+        step,
+      );
+      tilt.current.position.x = MathUtils.damp(
+        tilt.current.position.x,
+        pointer.current.x * 0.13 * reach,
+        3,
         step,
       );
       tilt.current.position.y = MathUtils.damp(
         tilt.current.position.y,
-        -scroll.current * 0.12,
+        -scroll.current * 0.12 - pointer.current.y * 0.08 * reach,
         3,
         step,
       );
@@ -119,12 +165,17 @@ function Lattice({ theme }: { theme: Theme }) {
     }
 
     if (shell.current) {
-      shell.current.rotation.y -= step * 0.08;
-      shell.current.rotation.x += step * 0.03;
+      const targetScale = 1 + pointer.current.near * 0.035;
+      shell.current.scale.setScalar(
+        MathUtils.damp(shell.current.scale.x, targetScale, 3, step),
+      );
+      shell.current.rotation.y -= step * (0.08 + pointer.current.near * 0.04);
+      shell.current.rotation.x += step * (0.03 + pointer.current.near * 0.02);
     }
 
     if (orbit.current) {
-      orbit.current.rotation.z += step * 0.55;
+      orbit.current.rotation.z +=
+        step * (0.55 + pointer.current.near * 1.1);
     }
   });
 

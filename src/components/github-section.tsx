@@ -53,13 +53,15 @@ export async function GitHubSection() {
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <SectionLabel index="04">GitHub</SectionLabel>
-              <h2 className="mt-5 max-w-[14ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-                {"The "}
-                <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
-                  trail
-                </em>
-                {" so far."}
-              </h2>
+              <div className="heading-mask">
+                <h2 className="heading-rise mt-5 max-w-[14ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+                  {"The "}
+                  <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
+                    trail
+                  </em>
+                  {" so far."}
+                </h2>
+              </div>
             </div>
 
             <div className="lg:col-span-5 lg:pb-2">

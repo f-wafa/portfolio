@@ -18,13 +18,15 @@ export function ContactSection() {
           <div className="lg:col-span-6">
             <Reveal>
               <SectionLabel index="05">Contact</SectionLabel>
-              <h2 className="mt-5 max-w-[15ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-                {"Have something worth "}
-                <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
-                  building
-                </em>
-                ?
-              </h2>
+              <div className="heading-mask">
+                <h2 className="heading-rise mt-5 max-w-[15ch] text-balance text-[clamp(2rem,4.6vw,3.35rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+                  {"Have something worth "}
+                  <em className="font-serif font-normal italic tracking-[-0.02em] text-accent">
+                    building
+                  </em>
+                  ?
+                </h2>
+              </div>
               <p className="mt-5 max-w-[44ch] text-[1.0625rem] leading-[1.7] text-muted">
                 Small builds, fixes, or a question about a project. Email is
                 the fastest way to reach me.

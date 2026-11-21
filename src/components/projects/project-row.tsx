@@ -122,7 +122,7 @@ export function ProjectRow({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Open ${title} at ${destinationLabel}`}
-            className="group/shot block overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="project-shot group/shot block overflow-hidden rounded-sm border border-line bg-surface transition-colors hover:border-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <span className="flex h-8 items-center justify-between gap-3 border-b border-line px-3">
               <span className="truncate font-mono text-[11px] text-muted">
@@ -130,14 +130,16 @@ export function ProjectRow({
               </span>
               <ArrowUpRightIcon className="h-3.5 w-3.5 shrink-0 text-muted transition-colors group-hover/shot:text-accent" />
             </span>
-            <Image
-              src={story.image}
-              alt={story.imageAlt}
-              width={1207}
-              height={952}
-              sizes="(min-width: 1024px) 33vw, calc(100vw - 2.5rem)"
-              className="aspect-[4/3] w-full object-cover object-top transition-transform duration-500 group-hover/shot:scale-[1.02] dark:brightness-[.94]"
-            />
+            <span className="block bg-paper">
+              <Image
+                src={story.image}
+                alt={story.imageAlt}
+                width={1207}
+                height={952}
+                sizes="(min-width: 1024px) 33vw, calc(100vw - 2.5rem)"
+                className="shot-print block aspect-[4/3] w-full object-cover object-top transition-transform duration-500 group-hover/shot:scale-[1.02] dark:brightness-[.94]"
+              />
+            </span>
           </a>
         </div>
       ) : null}
