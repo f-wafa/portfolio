@@ -270,12 +270,19 @@
 
 @media (hover: hover) and (pointer: fine) {
   .shot-print {
-    filter: grayscale(1) contrast(1.08);
+    --shot-brightness: 1;
+    filter: grayscale(1) contrast(1.08) brightness(var(--shot-brightness));
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 50%,
+      #000 var(--shot-dot, 3.1px),
+      transparent calc(var(--shot-dot, 3.1px) + 0.6px)
+    );
     mask-image: radial-gradient(
       circle at 50% 50%,
-      #000 var(--shot-dot),
-      transparent calc(var(--shot-dot) + 0.6px)
+      #000 var(--shot-dot, 3.1px),
+      transparent calc(var(--shot-dot, 3.1px) + 0.6px)
     );
+    -webkit-mask-size: 6px 6px;
     mask-size: 6px 6px;
     transition:
       --shot-dot 560ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -283,10 +290,14 @@
       transform 500ms ease;
   }
 
+  .dark .shot-print {
+    --shot-brightness: 0.94;
+  }
+
   .project-shot:hover .shot-print,
   .project-shot:focus-visible .shot-print {
     --shot-dot: 4.4px;
-    filter: grayscale(0) contrast(1);
+    filter: grayscale(0) contrast(1) brightness(var(--shot-brightness));
   }
 }
 
@@ -299,6 +310,7 @@
 @media print {
   .shot-print {
     filter: none;
+    -webkit-mask-image: none;
     mask-image: none;
   }
 }
@@ -323,7 +335,8 @@
 ::view-transition-new(root) {
   z-index: 2;
   clip-path: circle(0 at var(--theme-x, 50%) var(--theme-y, 0%));
-  animation: theme-reveal 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: clip-path;
+  animation: theme-reveal 560ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 @keyframes theme-reveal {
