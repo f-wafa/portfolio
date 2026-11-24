@@ -1,3 +1,4 @@
+import { ContactForm } from "@/components/contact-form";
 import { CopyEmailButton } from "@/components/copy-email-button";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
@@ -94,6 +95,8 @@ export function ContactSection() {
                 <CopyEmailButton email={profile.email} />
               </div>
             </div>
+
+            <ContactForm />
           </div>
         </Reveal>
       </div>
