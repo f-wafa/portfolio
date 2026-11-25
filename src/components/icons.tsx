@@ -41,6 +41,15 @@ export function ArrowLeftIcon({ className }: IconProps) {
   );
 }
 
+export function ArrowRightIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M3 8h10" />
+      <path d="m9 4 4 4-4 4" />
+    </Svg>
+  );
+}
+
 export function ArrowUpRightIcon({ className }: IconProps) {
   return (
     <Svg className={className}>

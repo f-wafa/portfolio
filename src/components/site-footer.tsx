@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpIcon } from "@/components/icons";
 import { profile } from "@/content/profile";
 import { sections } from "@/content/sections";
@@ -83,6 +84,12 @@ export function SiteFooter() {
             &copy; {year} {profile.name}.
           </p>
           <div className="flex flex-wrap items-center gap-x-5">
+            <Link
+              href="/links"
+              className="-mx-2 inline-flex min-h-11 items-center px-2 text-sm text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              All links
+            </Link>
             <FooterLink href="/cv/faiz-syaiful-wafa-cv.pdf">
               CV (PDF)
             </FooterLink>
