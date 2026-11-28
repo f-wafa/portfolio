@@ -4,8 +4,9 @@
 
 Personal site of **Faiz Syaiful Wafa**, a fullstack developer in training in Indonesia. One page, a CV, and a public trail of the work.
 
-- Live: [f-wafa-portfolio.vercel.app](https://f-wafa-portfolio.vercel.app)
-- CV: [/cv](https://f-wafa-portfolio.vercel.app/cv)
+- Live: [f-wafa-portfolio.vercel.app](https://f-wafa.vercel.app)
+- CV: [/cv](https://f-wafa.vercel.app/cv)
+- Links: [/links](https://f-wafa.vercel.app/links)
 - Source: [github.com/f-wafa/portfolio](https://github.com/f-wafa/portfolio)
 
 ![Faiz Syaiful Wafa, I build web things by feel.](public/og.png)
